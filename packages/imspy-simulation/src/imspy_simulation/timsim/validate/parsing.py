@@ -443,13 +443,15 @@ def format_sage_sequence(peptide: str) -> str:
         The formatted peptide sequence with UNIMOD annotations.
     """
     # Common Sage mass-to-UNIMOD mappings
+    # NOTE: The +/- signs inside brackets must be escaped (\+ / \-)
+    # otherwise '+' acts as a regex quantifier on '['
     mass_replacements = [
-        (r"\[+57\.0214\d*\]", "[UNIMOD:4]"),    # Carbamidomethyl (C)
-        (r"\[+15\.9949\d*\]", "[UNIMOD:35]"),   # Oxidation (M)
-        (r"\[+42\.0106\d*\]", "[UNIMOD:1]"),    # Acetyl (Protein N-term)
-        (r"\[+79\.9663\d*\]", "[UNIMOD:21]"),   # Phospho (STY)
-        (r"\[-17\.0265\d*\]", "[UNIMOD:385]"),  # Ammonia loss (N-term Q)
-        (r"\[-18\.0106\d*\]", "[UNIMOD:23]"),   # Water loss (N-term E)
+        (r"\[\+57\.0214\d*\]", "[UNIMOD:4]"),    # Carbamidomethyl (C) 57.021464
+        (r"\[\+15\.9949\d*\]", "[UNIMOD:35]"),   # Oxidation (M) 15.994915
+        (r"\[\+42\.0105\d*\]", "[UNIMOD:1]"),    # Acetyl (Protein N-term) 42.010565
+        (r"\[\+79\.9663\d*\]", "[UNIMOD:21]"),   # Phospho (STY) 79.966331
+        (r"\[\-17\.0265\d*\]", "[UNIMOD:385]"),  # Ammonia loss (N-term Q) -17.026549
+        (r"\[\-18\.0105\d*\]", "[UNIMOD:23]"),   # Water loss (N-term E) -18.010565
     ]
 
     result = peptide
